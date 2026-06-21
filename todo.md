@@ -8,9 +8,12 @@
 - [x] Conversation history storage (AsyncStorage)
 - [x] Settings screen with API key input
 - [x] Conversation history screen with delete
-- [ ] Audio feedback (text-to-speech for AI responses)
+- [x] Audio feedback (text-to-speech for AI responses)
 - [x] Haptic feedback on interactions
 - [x] Error handling and retry logic
+- [x] Wake word detection service for "Hori"
+- [x] Hori's personality voice configuration
+- [x] Context-aware voice responses (caring, playful, serious, encouraging)
 
 ## UI/UX
 - [x] Home screen layout with voice button and response area

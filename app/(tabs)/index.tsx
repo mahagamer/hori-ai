@@ -6,6 +6,7 @@ import { ScreenContainer } from "@/components/screen-container";
 import { cn } from "@/lib/utils";
 import { useColors } from "@/hooks/use-colors";
 import { createHoriPrompt } from "@/lib/hori-personality";
+import { getHoriTTSService } from "@/lib/hori-tts-service";
 
 interface Message {
   id: string;
@@ -125,8 +126,26 @@ export default function HomeScreen() {
       };
       setMessages((prev) => [...prev, assistantMessage]);
 
-      // Optional: Read response aloud (can be enabled in settings)
-      // await Speech.speak(assistantText);
+      // Speak the response with Hori's voice
+      try {
+        const ttsService = getHoriTTSService();
+        // Determine context based on response content
+        let context: "caring" | "playful" | "serious" | "encouraging" | "default" = "default";
+        const lowerText = assistantText.toLowerCase();
+        if (lowerText.includes("help") || lowerText.includes("support") || lowerText.includes("care")) {
+          context = "caring";
+        } else if (lowerText.includes("haha") || lowerText.includes("lol") || lowerText.includes("fun")) {
+          context = "playful";
+        } else if (lowerText.includes("important") || lowerText.includes("must") || lowerText.includes("serious")) {
+          context = "serious";
+        } else if (lowerText.includes("great") || lowerText.includes("awesome") || lowerText.includes("wonderful")) {
+          context = "encouraging";
+        }
+        await ttsService.speak(assistantText, context);
+      } catch (ttsError) {
+        console.warn("TTS error:", ttsError);
+        // Continue even if TTS fails
+      }
     } catch (error) {
       console.error("Error processing command:", error);
       alert("Error processing your request. Check your API key.");
