@@ -1,0 +1,67 @@
+name: Build APK
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+          cache: 'npm'
+      
+      - name: Install pnpm
+        run: npm install -g pnpm
+      
+      - name: Install dependencies
+        run: pnpm install
+      
+      - name: Setup EAS
+        run: npm install -g eas-cli
+      
+      - name: Authenticate with EAS
+        run: eas login --non-interactive
+        env:
+          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
+      
+      - name: Build APK
+        run: eas build --platform android --non-interactive --wait
+        env:
+          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
+      
+      - name: Download APK
+        run: |
+          # Get the build ID and download the APK
+          BUILD_ID=$(eas build list --limit 1 --platform android --json | jq -r '.[0].id')
+          echo "Build ID: $BUILD_ID"
+          eas build download --id $BUILD_ID --path ./hori-app.apk
+        env:
+          EAS_TOKEN: ${{ secrets.EAS_TOKEN }}
+      
+      - name: Upload APK to Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: ./hori-app.apk
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      
+      - name: Upload APK as Artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: hori-apk
+          path: ./hori-app.apk
+          retention-days: 30
