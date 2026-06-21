@@ -5,6 +5,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { ScreenContainer } from "@/components/screen-container";
 import { cn } from "@/lib/utils";
 import { useColors } from "@/hooks/use-colors";
+import { createHoriPrompt } from "@/lib/hori-personality";
 
 interface Message {
   id: string;
@@ -87,7 +88,8 @@ export default function HomeScreen() {
       setMessages((prev) => [...prev, userMessage]);
       setTranscription("");
 
-      // Call Gemini 2.0 Flash-Lite API
+      // Call Gemini 2.0 Flash-Lite API with Hori's personality
+      const horiPrompt = createHoriPrompt(command);
       const response = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-lite:generateContent", {
         method: "POST",
         headers: {
@@ -99,7 +101,7 @@ export default function HomeScreen() {
             {
               parts: [
                 {
-                  text: command,
+                  text: horiPrompt,
                 },
               ],
             },
@@ -146,8 +148,8 @@ export default function HomeScreen() {
       <View className="flex-1 flex-col">
         {/* Header */}
         <View className="px-6 py-4 border-b border-border">
-          <Text className="text-3xl font-bold text-foreground">Nova Agent</Text>
-          <Text className="text-sm text-muted mt-1">Voice-powered AI assistant</Text>
+          <Text className="text-3xl font-bold text-foreground">Hori</Text>
+          <Text className="text-sm text-muted mt-1">Your caring AI companion</Text>
         </View>
 
         {/* Conversation Area */}
@@ -159,7 +161,7 @@ export default function HomeScreen() {
           {messages.length === 0 ? (
             <View className="items-center justify-center py-12">
               <Text className="text-lg text-muted text-center">
-                Tap the microphone button below to start talking with Nova Agent
+                Tap the microphone button below to start talking with Hori
               </Text>
             </View>
           ) : (

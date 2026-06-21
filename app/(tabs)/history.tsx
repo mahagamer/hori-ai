@@ -99,7 +99,7 @@ export default function HistoryScreen() {
     <ScreenContainer className="flex-1 bg-background">
       {/* Header */}
       <View className="px-6 py-4 border-b border-border">
-        <Text className="text-3xl font-bold text-foreground">History</Text>
+        <Text className="text-3xl font-bold text-foreground">Hori's Memory</Text>
         <Text className="text-sm text-muted mt-1">
           {conversations.length} conversation{conversations.length !== 1 ? "s" : ""}
         </Text>
@@ -113,7 +113,7 @@ export default function HistoryScreen() {
       ) : conversations.length === 0 ? (
         <View className="flex-1 items-center justify-center px-6">
           <Text className="text-lg text-muted text-center">
-            No conversations yet. Start chatting with Nova Agent to see your history here.
+            No conversations yet. Start chatting with Hori to see your memories here.
           </Text>
         </View>
       ) : (

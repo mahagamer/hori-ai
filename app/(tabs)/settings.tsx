@@ -81,7 +81,7 @@ export default function SettingsScreen() {
       <ScrollView className="flex-1" contentContainerStyle={{ paddingBottom: 20 }}>
         {/* Header */}
         <View className="px-6 py-4 border-b border-border">
-          <Text className="text-3xl font-bold text-foreground">Settings</Text>
+          <Text className="text-3xl font-bold text-foreground">Hori Settings</Text>
         </View>
 
         {/* API Key Section */}
@@ -189,8 +189,9 @@ export default function SettingsScreen() {
         {/* About Section */}
         <View className="px-6 py-6 border-t border-border">
           <Text className="text-sm text-muted text-center">
-            Nova Agent v1.0.0{"\n"}
-            Powered by Google Gemini 1.5 Flash
+            Hori v1.0.0{"\n"}
+            Your caring AI companion{"\n"}
+            Powered by Google Gemini 2.0 Flash-Lite
           </Text>
         </View>
       </ScrollView>

@@ -1,4 +1,4 @@
-# Nova Agent - Project TODO
+# Hori - Project TODO
 
 ## Core Features
 - [x] Voice activation button with visual feedback
@@ -27,6 +27,9 @@
 - [x] Update app.config.ts with app name and logo
 - [x] Configure splash screen
 - [x] Set up Android adaptive icon
+- [x] Rebrand to Hori with anime character inspiration
+- [x] Implement Hori's personality system prompt
+- [x] Update all UI text to reference Hori
 
 ## Testing & Deployment
 - [ ] Test voice recording on iOS and Android

@@ -28,11 +28,11 @@ const schemeFromBundleId = `manus${timestamp}`;
 
 const env = {
   // App branding - update these values directly (do not use env vars)
-  appName: "Nova Agent",
-  appSlug: "nova-agent",
+  appName: "Hori",
+  appSlug: "hori-ai",
   // S3 URL of the app logo - set this to the URL returned by generate_image when creating custom logo
   // Leave empty to use the default icon from assets/images/icon.png
-  logoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663781300099/SXKVvftpgC8YZWLe4Gfqq8/icon-BCQFTcJA8pdq6ySQ76akJt.png",
+  logoUrl: "https://d2xsxph8kpxj0f.cloudfront.net/310519663781300099/SXKVvftpgC8YZWLe4Gfqq8/icon-o8BMGrNKB2ksf3Jqnnp7M2.png",
   scheme: schemeFromBundleId,
   iosBundleId: bundleId,
   androidPackage: bundleId,
